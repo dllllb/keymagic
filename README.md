@@ -13,7 +13,6 @@
 - Deep learning tecniques for error-tolerant input
 - the task is similar to image captioning hence similar architecture can be used
 
-
 ## Gestures generator
 
 - it is possible to make generator of user's gestures for the samples of text from the internet and than use its outut to train a model of any complexity
