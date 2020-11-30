@@ -2,7 +2,7 @@ A neural net for SWYPE-like gestures recognition, trained on synthetic data.
 
 # Approach
 
-The task is similar to image captioning hence similar architecture can be used
+The task is similar to image captioning hence similar architecture can be used.
 
 ## Neural network architecture
 
