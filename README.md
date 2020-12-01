@@ -2,9 +2,9 @@ A neural net for SWYPE-like gestures recognition, trained on synthetic data.
 
 # Neural network architecture
 
-CNN encder + RNN decoder. Input: full gesture points sequience, output: characters, one character per RNN output repeat.
+CNN encder + RNN decoder. Input: gesture points sequience, output: characters, one character per RNN output repeat. Underlaying letter code is added to each gesture point as its 3-rd component.
 
-Gesture points are time-ordered, hence it is reasonable to consider input for CNN layer as ordered array of 2D points: first filter gets points 1-10, second filter gets points 2-11 etc. 3D points could be used if underlaying letter code is added to gesture points.
+Gesture points are time-ordered, hence it is reasonable to consider input for CNN layer as ordered array of 2D points: first filter gets points 1-10, second filter gets points 2-11 etc.
 
 # Related work
 
