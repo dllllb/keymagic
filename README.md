@@ -1,5 +1,8 @@
 A neural net for SWYPE-like gestures recognition, trained on synthetic data.
 
+Synthetic data generation [demo notebook](strokes.pynb)
+Simple model [demo notebook](cnn-test.ipynb)
+
 # Neural network architecture
 
 CNN encder + RNN decoder. Input: gesture points sequience, output: characters, one character per RNN output repeat. Underlaying letter code is added to each gesture point as its 3-rd component.
