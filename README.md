@@ -1,6 +1,7 @@
 A neural net for SWYPE-like gestures recognition, trained on synthetic data.
 
-Synthetic data generation [demo notebook](strokes.pynb)
+Synthetic data generation [demo notebook](strokes.ipynb)
+
 Simple model [demo notebook](cnn-test.ipynb)
 
 # Neural network architecture
