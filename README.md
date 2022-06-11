@@ -10,7 +10,7 @@ CNN encder + RNN decoder. Input: gesture points sequience, output: characters, o
 
 Gesture points are time-ordered, hence it is reasonable to consider input for CNN layer as ordered array of 2D points: first filter gets points 1-10, second filter gets points 2-11 etc.
 
-# Resources
+# Related papers
 
 - Deep Visual-Semantic Alignments for Generating Image Descriptions / Andrej Karpathy, Li Fei-Fei / CVPR 2015
 - Show, attend and tell: Neural image caption generation with visual attention / K. Xu, J. Ba, R. Kiros, K. Cho, A. Courville, R. Salakhutdinov, R.S. Zemel, Y. Bengio / ICML 2015
