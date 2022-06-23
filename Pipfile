@@ -7,9 +7,11 @@ verify_ssl = true
 pylint = "*"
 
 [packages]
-Keras = ">=1,<2"
+tensorflow-cpu = "*"
 Pillow = ">=5"
 jupyter = "*"
+matplotlib = "*"
+h5py = "*"
 
 [requires]
 python_version = "3.8"

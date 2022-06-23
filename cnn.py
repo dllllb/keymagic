@@ -1,5 +1,5 @@
 from keras.models import Sequential
-from keras.layers import Dense, Activation, Dropout, Flatten, RepeatVector, TimeDistributed
+from keras.layers import Dense, Activation, Flatten, RepeatVector, TimeDistributed
 from keras.layers import LSTM
 from keras.layers import Convolution1D, MaxPooling1D
 from keras.optimizers import RMSprop
@@ -24,7 +24,7 @@ def model_cnn_lstm(props):
     model.add(TimeDistributed(Dense(n_chars)))
     model.add(TimeDistributed(Activation('softmax')))
 
-    model.compile(loss='categorical_crossentropy', optimizer=RMSprop(lr=props['lr']))
+    model.compile(loss='categorical_crossentropy', optimizer=RMSprop(learning_rate=props['lr']))
     return model
 
 

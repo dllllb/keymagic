@@ -116,7 +116,7 @@ def generate_input(word, n_points, kbrd):
     l = word_to_line(buttons, word, randomness=10, details=details, max_points=n_points)
     letters = list()
     for x, y in l:
-        if x <= km.shape[0] and y <= km.shape[1]:
+        if x < km.shape[0] and y < km.shape[1]:
             letters.append(km[x, y])
         else:
             letters.append(-1)
@@ -130,40 +130,32 @@ def predict(model, kbrd, curve):
     return ''.join([id2char[ix] for ix in np.argmax(p[0], axis=1)]).strip()
 
 
-def generate_dataset_words(props, kbrd, char_limit=None):
+def generate_dataset_words(train_data, n_points, n_chars, max_letters, kbrd, char_limit=None):
     char_ind = kbrd['char_indices']
-    n_chars = props['n_chars']
     
-    with open(props['train_data']) as f:
+    with open(train_data) as f:
         if char_limit is not None:
             text = f.read(char_limit)
         else:
             text = f.read()
 
     input_text = re.sub("[^a-zA-Z'-]", ' ', text).lower()
-    
-    n_points=props['n_points']
-    max_letters=props['max_letters']
-    
+        
     trans_table = {ord(c): None for c in "'-"}
     
-    words = [
-        w.translate(trans_table) for w in input_text.split()
-        if len(w) > 1
-        and len(set(w)) > 1
-        and len(w) <= max_letters
-    ]
+    words = [w.translate(trans_table) for w in input_text.split()]
+    words = [w for w in words if len(w) > 1 and len(set(w)) > 1 and len(w) <= max_letters]
     
     input_len = sum([len(w) for w in words]) + len(words)
 
-    X = np.zeros((len(words), n_points, 3), dtype=np.short)
+    x = np.zeros((len(words), n_points, 3), dtype=np.short)
     y = np.zeros((len(words), max_letters, n_chars), dtype=np.bool)
 
     shift = 0
     for word, w_pos in zip(words, range(len(words))):
         try:
             line = generate_input(word, n_points, kbrd)
-            X[w_pos] = line
+            x[w_pos] = line
             out = word + ' '*(max_letters-len(word))
             for char, c_pos in zip(out, range(len(out))):
                 y[w_pos, c_pos, char_ind[char]] = 1
@@ -171,7 +163,7 @@ def generate_dataset_words(props, kbrd, char_limit=None):
             print(word)
             raise
         
-    return X, y
+    return x, y
 
 
 def draw_keyboard(kbrd):
@@ -210,16 +202,16 @@ def key_matrix(buttons, size):
     return key_matrix
 
 
-def dump_dataset(path, X, y):
+def dump_dataset(path, x, y):
     import h5py
 
     with h5py.File(path, 'w') as f:
-        f.create_dataset('X', data=X, compression="gzip")
+        f.create_dataset('x', data=x, compression="gzip")
         f.create_dataset('y', data=y, compression="gzip")
 
 
 def read_dataset(path):
     with h5py.File(path) as f:
-        X = f['X'][:]
+        X = f['x'][:]
         y = f['y'][:]
-        return X, y
+        return x, y
