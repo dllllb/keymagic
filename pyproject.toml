@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "keymagic"
+version = "0.1.0"
+description = "A SWYPE-like gestures generator, and a simple neural net for end-to-end SWYPE-like gestures recognition"
+requires-python = ">=3.10"
+readme = "README.md"
+dependencies = [
+    "tensorflow",
+    "keras<3",
+    "Pillow>=5",
+    "jupyter",
+    "matplotlib",
+    "h5py",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pylint",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.pylint.messages.control]
+disable = ["C0111", "C0103"] 
